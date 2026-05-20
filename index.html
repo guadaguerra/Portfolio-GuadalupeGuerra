@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guadalupe Guerra — Content Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0e0e0e;
+    --white: #f5f2ee;
+    --purple: #E63946;
+    --purple-light: #ff8a95;
+    --purple-dark: #8b1a26;
+    --coral: #C1121F;
+    --teal: #FFB627;
+    --yellow: #F5C842;
+    --gray: #8a8780;
+    --gray-light: #e8e5e0;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--purple);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--purple-light);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+    opacity: 0.6;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(14,14,14,0.8);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--purple); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--purple);
+    transition: width 0.25s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    position: relative;
+    max-width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--purple);
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+  .hero-name .line2 {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--purple-light);
+  }
+
+  .hero-tagline-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 3rem;
+    gap: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.55s forwards;
+  }
+
+  .typewriter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .typewriter-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+  }
+  .typewriter {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--yellow);
+    min-width: 300px;
+  }
+  .typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background: var(--yellow);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 0.9s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+  }
+  .stat {
+    text-align: right;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--purple); }
+  .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.7s forwards;
+  }
+  .badge {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid;
+  }
+  .badge-purple { border-color: var(--purple); color: var(--purple-light); background: rgba(230,57,70,0.1); }
+  .badge-coral { border-color: var(--coral); color: #ff8a95; background: rgba(193,18,31,0.1); }
+  .badge-teal { border-color: var(--teal); color: #FFD166; background: rgba(255,182,39,0.1); }
+  .badge-yellow { border-color: var(--yellow); color: #f9df7e; background: rgba(245,200,66,0.1); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1s forwards;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--purple), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* BG GRID */
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(230,57,70,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(230,57,70,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-glow {
+    position: fixed;
+    top: -20%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(230,57,70,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-glow2 {
+    position: fixed;
+    bottom: -10%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(193,18,31,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ensure content is above bg */
+  nav, section, #hero { position: relative; z-index: 1; }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* SOBRE MÍ */
+  #sobre {
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .sobre-text {
+    font-size: 1.05rem;
+    color: rgba(245,242,238,0.75);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .sobre-text strong { color: var(--white); font-weight: 500; }
+  .sobre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .tool-pill {
+    font-size: 0.75rem;
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--gray);
+    transition: all 0.2s;
+  }
+  .tool-pill:hover {
+    border-color: var(--purple);
+    color: var(--purple-light);
+    background: rgba(230,57,70,0.08);
+  }
+  .sobre-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .attr-card {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .attr-card:hover {
+    border-color: rgba(230,57,70,0.4);
+    background: rgba(230,57,70,0.05);
+  }
+  .attr-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--purple);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .attr-value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .attr-sub {
+    font-size: 0.82rem;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  /* CASOS DE MARCA */
+  #casos { border-top: 1px solid rgba(255,255,255,0.06); }
+  .casos-grid { display: flex; flex-direction: column; gap: 1.5px; }
+  .caso-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.75rem 2rem;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .caso-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent-color, var(--purple));
+    border-radius: 3px 0 0 3px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .caso-row:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); }
+  .caso-row:hover::before { opacity: 1; }
+  .caso-num {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+  }
+  .caso-main { display: flex; flex-direction: column; gap: 4px; }
+  .caso-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .caso-desc { font-size: 0.82rem; color: var(--gray); }
+  .caso-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .caso-tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(230,57,70,0.15);
+    color: var(--purple-light);
+    border: 1px solid rgba(230,57,70,0.25);
+  }
+  .caso-tag.coral { background: rgba(193,18,31,0.15); color: #ff8a95; border-color: rgba(193,18,31,0.25); }
+  .caso-tag.teal { background: rgba(255,182,39,0.15); color: #FFD166; border-color: rgba(255,182,39,0.25); }
+  .caso-tag.yellow { background: rgba(245,200,66,0.15); color: #f9df7e; border-color: rgba(245,200,66,0.25); }
+  .caso-metric {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .caso-metric-num {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--white);
+  }
+  .caso-metric-label { font-size: 0.65rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* IA & CRMs */
+  #ia { border-top: 1px solid rgba(255,255,255,0.06); }
+  .ia-intro {
+    font-size: 1rem;
+    color: rgba(245,242,238,0.65);
+    font-weight: 300;
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.75;
+  }
+  .ia-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .ia-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(230,57,70,0.2);
+    border-radius: 16px;
+    background: rgba(230,57,70,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  .ia-card:hover {
+    border-color: rgba(230,57,70,0.5);
+    background: rgba(230,57,70,0.1);
+    transform: translateY(-3px);
+  }
+  .ia-card::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(230,57,70,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .ia-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .ia-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .ia-desc {
+    font-size: 0.82rem;
+    color: rgba(245,242,238,0.55);
+    line-height: 1.6;
+  }
+  .ia-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-top: 1rem;
+  }
+  .ia-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .ia-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .ia-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid rgba(245,200,66,0.35);
+    border-radius: 999px;
+    background: rgba(245,200,66,0.06);
+    transition: all 0.2s;
+    position: relative;
+    z-index: 2;
+  }
+  .ia-link:hover {
+    background: var(--yellow);
+    color: var(--black);
+    border-color: var(--yellow);
+    transform: translateX(2px);
+  }
+  .ia-link span { transition: transform 0.2s; }
+  .ia-link:hover span { transform: translateX(3px); }
+  button.ia-link {
+    font-family: var(--font-display);
+    cursor: pointer;
+    appearance: none;
+  }
+  .ia-link .play-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 0.55rem;
+    margin-right: 2px;
+    transition: all 0.2s;
+  }
+  .ia-link:hover .play-dot { background: var(--black); color: var(--yellow); }
+
+  /* VIDEO MODAL */
+  .video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: modalFade 0.25s ease;
+  }
+  .video-modal.active { display: flex; }
+  .video-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    background: var(--black);
+    border: 1px solid rgba(230,57,70,0.35);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,200,66,0.08);
+    animation: modalUp 0.35s ease;
+  }
+  .video-modal-header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(14,14,14,0.95);
+  }
+  .video-modal-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .video-modal-close {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .video-modal-close:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    transform: rotate(90deg);
+  }
+  .video-modal video,
+  .video-modal-frame iframe,
+  .video-modal-frame video {
+    width: 100%;
+    display: block;
+    background: black;
+    aspect-ratio: 16/9;
+    object-fit: contain;
+    border: 0;
+  }
+  .video-modal-frame {
+    width: 100%;
+    background: black;
+    aspect-ratio: 16/9;
+  }
+  .video-modal-frame:empty { display: none; }
+  .video-modal-fallback {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+    display: none;
+  }
+  .video-modal-fallback strong { color: var(--yellow); font-weight: 600; }
+  @keyframes modalFade { from {opacity:0} to {opacity:1} }
+  @keyframes modalUp { from {opacity:0; transform: translateY(20px) scale(0.98)} to {opacity:1; transform: translateY(0) scale(1)} }
+
+  /* DISEÑO */
+  #diseno { border-top: 1px solid rgba(255,255,255,0.06); }
+  .diseno-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--purple);
+    color: var(--purple-light);
+    background: rgba(230,57,70,0.1);
+  }
+  .diseno-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .diseno-item {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: all 0.25s;
+    cursor: pointer;
+    position: relative;
+    background: rgba(255,255,255,0.02);
+    aspect-ratio: 4/5;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .diseno-item:hover { border-color: rgba(245,200,66,0.4); transform: translateY(-4px); }
+  .diseno-preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(230,57,70,0.06), rgba(245,200,66,0.04));
+  }
+  .diseno-preview img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+    z-index: 1;
+  }
+  .diseno-item:hover .diseno-preview img { transform: scale(1.05); }
+  .diseno-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--gray);
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 1rem;
+    z-index: 0;
+  }
+  .diseno-placeholder-icon {
+    font-size: 2rem;
+    opacity: 0.4;
+  }
+  .diseno-placeholder code {
+    font-family: 'DM Sans', monospace;
+    font-size: 0.65rem;
+    background: rgba(255,255,255,0.05);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px dashed rgba(255,255,255,0.12);
+    color: var(--yellow);
+    word-break: break-all;
+  }
+  .diseno-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(14,14,14,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    z-index: 3;
+  }
+  .diseno-badge.instagram { color: #ff8a95; border-color: rgba(230,57,70,0.5); }
+  .diseno-badge.tiktok { color: var(--yellow); border-color: rgba(245,200,66,0.5); }
+  .diseno-badge.youtube { color: var(--purple-light); border-color: rgba(230,57,70,0.5); }
+  .diseno-badge.web { color: var(--teal); border-color: rgba(255,182,39,0.5); }
+  .diseno-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,14,14,0.85) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .diseno-item:hover .diseno-overlay { opacity: 1; }
+  .diseno-overlay-cta {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .diseno-label {
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    position: relative;
+    z-index: 2;
+  }
+  .diseno-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .diseno-type {
+    font-size: 0.68rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .diseno-coming {
+    grid-column: span 3;
+    border: 1px dashed rgba(245,200,66,0.25);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--gray);
+  }
+  .diseno-coming code {
+    background: rgba(245,200,66,0.08);
+    padding: 2px 8px;
+    border-radius: 6px;
+    color: var(--yellow);
+    font-size: 0.78rem;
+    font-family: 'DM Sans', monospace;
+    margin: 0 2px;
+  }
+
+  /* CONTACTO */
+  #contacto { border-top: 1px solid rgba(255,255,255,0.06); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-left {}
+  .contact-headline {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .contact-headline em { color: var(--purple); font-style: normal; }
+  .contact-text {
+    font-size: 0.95rem;
+    color: rgba(245,242,238,0.6);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--white); }
+  .contact-link-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(230,57,70,0.12);
+    border: 1px solid rgba(230,57,70,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--purple-light);
+    flex-shrink: 0;
+  }
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    font-weight: 500;
+  }
+  .form-input, .form-textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--purple);
+    background: rgba(230,57,70,0.06);
+  }
+  .form-textarea { resize: vertical; min-height: 130px; }
+  .form-submit {
+    margin-top: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--purple);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+  .form-submit:hover { background: #b8252f; transform: translateY(-1px); }
+  .form-submit:active { transform: translateY(0); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 0.03em;
+  }
+  .footer-made {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+  }
+  .footer-made span { color: var(--purple); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* TRAYECTORIA */
+  .trayectoria {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .trayectoria-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .tray-block-title {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .tray-block-title::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--purple);
+  }
+  .timeline {
+    position: relative;
+    padding-left: 1.75rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--purple), var(--yellow) 50%, rgba(255,255,255,0.05));
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1.75rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 6px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent, var(--purple));
+    box-shadow: 0 0 0 3px rgba(14,14,14,1), 0 0 0 4px var(--accent, var(--purple));
+  }
+  .timeline-date {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .timeline-role {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+  }
+  .timeline-company {
+    font-size: 0.85rem;
+    color: var(--purple-light);
+    margin-top: 2px;
+  }
+  .timeline-desc {
+    font-size: 0.85rem;
+    color: rgba(245,242,238,0.6);
+    line-height: 1.6;
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  .edu-list { display: flex; flex-direction: column; gap: 1rem; }
+  .edu-card {
+    padding: 1.1rem 1.3rem;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-card:hover {
+    border-color: rgba(230,57,70,0.4);
+    background: rgba(230,57,70,0.05);
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent, var(--purple));
+  }
+  .edu-status {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .edu-status.curso {
+    background: rgba(245,200,66,0.12);
+    color: var(--yellow);
+    border: 1px solid rgba(245,200,66,0.3);
+  }
+  .edu-status.completo {
+    background: rgba(230,57,70,0.12);
+    color: var(--purple-light);
+    border: 1px solid rgba(230,57,70,0.3);
+  }
+  .edu-status.certif {
+    background: rgba(255,182,39,0.12);
+    color: var(--teal);
+    border: 1px solid rgba(255,182,39,0.3);
+  }
+  .edu-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .edu-inst {
+    font-size: 0.78rem;
+    color: var(--gray);
+    margin-top: 3px;
+  }
+
+  /* SOCIAL RAIL */
+  .social-rail {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 1.5rem;
+  }
+  .social-rail::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 70px;
+    background: linear-gradient(to bottom, rgba(245,200,66,0.5), transparent);
+    margin-top: 0.5rem;
+  }
+  .social-rail a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: var(--gray);
+    transition: all 0.25s ease;
+    background: rgba(14,14,14,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .social-rail a:hover {
+    color: var(--yellow);
+    border-color: var(--yellow);
+    background: rgba(245,200,66,0.1);
+    transform: translateY(-2px);
+  }
+  .social-rail svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+  @media (max-width: 900px) {
+    .social-rail {
+      position: static;
+      flex-direction: row;
+      justify-content: center;
+      padding: 1.5rem 0 0;
+      gap: 0.75rem;
+    }
+    .social-rail::after { display: none; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-name { font-size: clamp(3rem, 14vw, 5rem); }
+    .hero-tagline-row { flex-direction: column; align-items: flex-start; }
+    .hero-stats { flex-direction: row; }
+    .sobre-grid, .contact-grid, .trayectoria-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .ia-grid, .diseno-grid { grid-template-columns: 1fr; }
+    .diseno-coming { grid-column: span 1; }
+    .caso-row { grid-template-columns: 40px 1fr; }
+    .caso-metric { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SOCIAL RAIL (rail vertical en desktop · oculto en mobile, ya está en footer) -->
+<aside class="social-rail" aria-label="Redes sociales">
+  <a href="https://instagram.com/guadaguerraa" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.069 1.646.069 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.069-4.85.069s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311 1.266-.058 1.646-.069 4.85-.069zm0-2.163C8.741 0 8.332.012 7.052.07 5.775.127 4.602.388 3.635 1.355 2.668 2.322 2.407 3.495 2.35 4.772.013 6.052 0 6.461 0 12c0 5.539.013 5.948.07 7.228.057 1.277.318 2.45 1.285 3.417.967.967 2.14 1.228 3.417 1.285C8.332 23.988 8.741 24 12 24s3.668-.012 4.948-.07c1.277-.057 2.45-.318 3.417-1.285.967-.967 1.228-2.14 1.285-3.417.057-1.28.069-1.689.069-7.228 0-5.539-.013-5.948-.07-7.228-.057-1.277-.318-2.45-1.285-3.417C19.398.388 18.225.127 16.948.07 15.668.012 15.259 0 12 0z"/><path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg>
+  </a>
+  <a href="https://www.linkedin.com/in/guadalupe-guerra/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+  </a>
+  <a href="#https://www.tiktok.com/@guadaguerraa" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.66 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.7-.1z"/></svg>
+  </a>
+  <a href="https://www.facebook.com/guada.guerra1/?locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+  </a>
+</aside>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">GG<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre mí</a></li>
+    <li><a href="#casos">Proyectos</a></li>
+    <li><a href="#ia">IA & CRMs</a></li>
+    <li><a href="#diseno">Diseño</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Buenos Aires, Argentina · 25 años · Disponible</p>
+    <h1 class="hero-name">
+      Guadalupe<br>
+      <span class="line2">Guerra.</span>
+    </h1>
+    <div class="hero-tagline-row">
+      <div class="typewriter-wrap">
+        <span class="typewriter-label">Especialista en</span>
+        <span class="typewriter" id="typewriter"></span><span class="typewriter-cursor"></span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">6<span>+</span></div>
+          <div class="stat-label">Años de exp.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">9<span>+</span></div>
+          <div class="stat-label">Marcas activas</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">CRMs con IA</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-badges">
+      <span class="badge badge-purple">Content Strategy</span>
+      <span class="badge badge-coral">Community Management</span>
+      <span class="badge badge-teal">IA Aplicada</span>
+      <span class="badge badge-yellow">Brand Partnerships</span>
+      <span class="badge badge-purple">Adobe CC · CapCut · Figma</span>
+      <span class="badge badge-coral">Cambridge CAE</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="sobre">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="sobre-grid">
+    <div class="reveal">
+      <p class="sobre-text">
+        Soy especialista en contenidos digitales con más de <strong>4 años gestionando comunidades, marcas y estrategias de crecimiento.</strong> Me muevo con facilidad entre la creatividad visual, la escritura estratégica y la implementación de herramientas de IA generativa.<br><br>
+        Me define el mundo del entretenimiento, los influencers, los lanzamientos de marca y los eventos digitales. Aprendizaje continuo, siempre actualizada, siempre en movimiento.<br><br>
+        Lo que más me diferencia: <strong>construyo herramientas reales con IA</strong> que el equipo termina usando todos los días.
+      </p>
+      <div class="sobre-tags">
+        <span class="tool-pill">Adobe Illustrator</span>
+        <span class="tool-pill">Photoshop</span>
+        <span class="tool-pill">CapCut</span>
+        <span class="tool-pill">Canva</span>
+        <span class="tool-pill">Figma</span>
+        <span class="tool-pill">Metricool</span>
+        <span class="tool-pill">Meta Business Suite</span>
+        <span class="tool-pill">Monday.com</span>
+        <span class="tool-pill">WordPress</span>
+        <span class="tool-pill">Claude AI</span>
+        <span class="tool-pill">ChatGPT</span>
+        <span class="tool-pill">Notion</span>
+      </div>
+    </div>
+    <div class="sobre-right reveal">
+      <div class="attr-card">
+        <div class="attr-label">Rol actual</div>
+        <div class="attr-value">Content Strategist - Community Manager</div>
+        <div class="attr-sub">NLK Capital · Jul 2024 – Presente · 9 marcas simultáneas</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-label">Idiomas</div>
+        <div class="attr-value">Español - Nativo · Inglés - Avanzado </div>
+        <div class="attr-sub">Cambridge CAE — certificado</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-label">Formación en curso</div>
+        <div class="attr-value">IA con Claude · HubSpot</div>
+        <div class="attr-sub">Platzi · HubSpot Academy · 2026</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TRAYECTORIA -->
+  <div class="trayectoria">
+    <div class="trayectoria-grid">
+      <div class="reveal">
+        <div class="tray-block-title">Experiencia profesional</div>
+        <div class="timeline">
+          <div class="timeline-item" style="--accent: var(--purple);">
+            <div class="timeline-date">Jul 2024 — Presente</div>
+            <div class="timeline-role">Content Strategist & Community Manager</div>
+            <div class="timeline-company">NLK Capital</div>
+            <div class="timeline-desc">Gestión integral de 8 marcas simultáneas: estrategia de contenidos, calendarios editoriales y análisis de KPIs. Diseño con Adobe Illustrator y Photoshop, edición de Reels, TikToks y Stories con CapCut. Desarrollo de 3 CRMs interactivos con IA (Claude AI) en uso por el equipo. Programación multiplataforma con Metricool y Meta Business Suite.</div>
+          </div>
+          <div class="timeline-item" style="--accent: var(--yellow);">
+            <div class="timeline-date">Oct 2025 — Presente</div>
+            <div class="timeline-role">Community Manager</div>
+            <div class="timeline-company">Petit Pastelería</div>
+            <div class="timeline-desc">Manejo completo de redes sociales. Entrega semanal de 2 historias por día, 1 reel, 1 carrusel y 1 post. Contenido filmado y fotografiado in situ.</div>
+          </div>
+          <div class="timeline-item" style="--accent: var(--coral);">
+            <div class="timeline-date">Oct 2023 — Mar 2024</div>
+            <div class="timeline-role">Gestión Digital & Contenidos</div>
+            <div class="timeline-company">Ramasso Productora</div>
+            <div class="timeline-desc">Coordinación con representantes, artistas y equipos de producción para comunicación de eventos de entretenimiento. Edición de videos post-evento, gestión de publicaciones y administración de sitio web en WordPress.</div>
+          </div>
+          <div class="timeline-item" style="--accent: var(--purple);">
+            <div class="timeline-date">Mar 2022 — Abr 2023</div>
+            <div class="timeline-role">Community Manager</div>
+            <div class="timeline-company">DBI Group</div>
+            <div class="timeline-desc">Gestión de comunidad online, atención al cliente y estrategia de contenido educativo para empresa de cripto-minería. Diseño de piezas orgánicas y administración de redes en múltiples plataformas.</div>
+          </div>
+          <div class="timeline-item" style="--accent: var(--yellow);">
+            <div class="timeline-date">Dic 2021 — Mar 2022</div>
+            <div class="timeline-role">Community Manager & Atención al Cliente</div>
+            <div class="timeline-company">MiningStore Arg</div>
+            <div class="timeline-desc">Producción de contenido para redes sociales y atención al cliente en entorno de ventas de tecnología.</div>
+          </div>
+          <div class="timeline-item" style="--accent: var(--yellow);">
+            <div class="timeline-date">Jun 2020 — Ene 2021</div>
+            <div class="timeline-role">Atención al Cliente</div>
+            <div class="timeline-company">Sprinkles & More</div>
+            <div class="timeline-desc">Atención al cliente en tienda especializada en pastelería creativa y repostería.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="tray-block-title">Educación & formación</div>
+        <div class="edu-list">
+          <div class="edu-card" style="--accent: var(--yellow);">
+            <span class="edu-status curso">En curso · 2026</span>
+            <div class="edu-title">Marketing de Contenidos</div>
+            <div class="edu-inst">HubSpot Academy</div>
+          </div>
+          <div class="edu-card" style="--accent: var(--yellow);">
+            <span class="edu-status curso">En curso · 2026</span>
+            <div class="edu-title">Certificación en IA con Claude</div>
+            <div class="edu-inst">Platzi</div>
+          </div>
+          <div class="edu-card" style="--accent: var(--coral);">
+            <span class="edu-status completo">2022 — 2023</span>
+            <div class="edu-title">Desarrollo Web · Diseño UX/UI · UX/UI Avanzado</div>
+            <div class="edu-inst">Coderhouse</div>
+          </div>
+          <div class="edu-card" style="--accent: var(--purple);">
+            <span class="edu-status completo">2021 — 2022</span>
+            <div class="edu-title">Diseño de Imagen y Sonido</div>
+            <div class="edu-inst">Universidad de Palermo</div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASOS DE MARCA -->
+<section id="casos">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Proyectos</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="casos-grid">
+    <div class="caso-row reveal" style="--accent-color: var(--teal);">
+      <div class="caso-num">01</div>
+      <div class="caso-main">
+        <div class="caso-name">Crowdium</div>
+        <div class="caso-desc">Plataforma de crowdfunding inmobiliario — 1ra en LATAM. Estrategia de contenido, Reels, blogs y notas en diarios digitales.</div>
+        <div class="caso-tags">
+          <span class="caso-tag teal">Real Estate</span>
+          <span class="caso-tag teal">Blog editorial</span>
+          <span class="caso-tag teal">Inversiones</span>
+        </div>
+      </div>
+      <div></div>
+      <div class="caso-metric">
+        <div class="caso-metric-num">14.6K</div>
+        <div class="caso-metric-label">seguidores</div>
+      </div>
+    </div>
+    <div class="caso-row reveal" style="--accent-color: var(--yellow);">
+      <div class="caso-num">02</div>
+      <div class="caso-main">
+        <div class="caso-name">Vaca Muerta Services</div>
+        <div class="caso-desc">Alojamiento corporativo en Neuquén. Diseño, publicación y programación de contenido — 3 veces por día, 7 días a la semana.</div>
+        <div class="caso-tags">
+          <span class="caso-tag yellow">Energía</span>
+          <span class="caso-tag yellow">Noticias + brand</span>
+          <span class="caso-tag yellow">Alto volumen</span>
+        </div>
+      </div>
+      <div></div>
+      <div class="caso-metric">
+        <div class="caso-metric-num">19K→</div>
+         <div class="caso-metric-label">seguidores</div>
+        <div class="caso-metric-label">crecimiento constante</div>
+      </div>
+    </div>
+    <div class="caso-row reveal" style="--accent-color: var(--coral);">
+      <div class="caso-num">03</div>
+      <div class="caso-main">
+        <div class="caso-name">Landium</div>
+        <div class="caso-desc">Inmobiliaria boutique del Corredor Norte. Rebranding de imagen hacia un público exclusivo + implementación de Reels con mayor impacto.</div>
+        <div class="caso-tags">
+          <span class="caso-tag coral">Real Estate exclusivo</span>
+          <span class="caso-tag coral">Rebranding</span>
+          <span class="caso-tag coral">Reels</span>
+        </div>
+      </div>
+      <div></div>
+      <div class="caso-metric">
+        <div class="caso-metric-num">3.1K</div>
+        <div class="caso-metric-label">seguidores</div>
+      </div>
+    </div>
+    <div class="caso-row reveal" style="--accent-color: var(--purple);">
+      <div class="caso-num">04</div>
+      <div class="caso-main">
+        <div class="caso-name">Pavetron</div>
+        <div class="caso-desc">Empresa de pavimento ecológico — arrancamos de cero. Construcción de identidad, piezas estáticas y Reels de producto en campo.</div>
+        <div class="caso-tags">
+          <span class="caso-tag">Desde cero</span>
+          <span class="caso-tag">Sustentabilidad</span>
+          <span class="caso-tag">Video en campo</span>
+        </div>
+      </div>
+      <div></div>
+      <div class="caso-metric">
+        <div class="caso-metric-num">1k→</div>
+        <div class="caso-metric-label">crecimiento constante</div>
+      </div>
+    </div>
+    <div class="caso-row reveal" style="--accent-color: var(--teal);">
+      <div class="caso-num">05</div>
+      <div class="caso-main">
+        <div class="caso-name">Petit Pastelería</div>
+        <div class="caso-desc">Manejo completo de redes. 2 stories/día + 1 reel + 1 carrusel + 1 post semanal. Contenido filmado y fotografiado en el lugar.</div>
+        <div class="caso-tags">
+          <span class="caso-tag teal">Food & lifestyle</span>
+          <span class="caso-tag teal">Fotografía propia</span>
+          <span class="caso-tag teal">Oct 2025–presente</span>
+        </div>
+      </div>
+      <div></div>
+      <div class="caso-metric">
+        <div class="caso-metric-num">4K</div>
+        <div class="caso-metric-label">seguidores</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IA & CRMs -->
+<section id="ia">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">IA & CRMs</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="ia-intro reveal">
+    No solo uso IA para generar contenido — la uso para construir herramientas reales que el equipo termina adoptando. Estos son 3 CRMs interactivos que desarrollé con Claude AI y que hoy están en uso activo.
+  </p>
+  <div class="ia-grid">
+    <div class="ia-card reveal">
+      <span class="ia-icon">🚧</span>
+      <div class="ia-title">CRM de Leads — Pavetron</div>
+      <div class="ia-desc">Gestión de leads diferenciada por red social de origen. Permite el contacto directo entre el interesado y el asesor comercial, todo centralizado en un mismo panel para no perder ningún seguimiento.</div>
+      <div class="ia-footer">
+        <div class="ia-status">En uso activo</div>
+        <button type="button" class="ia-link" data-youtube="https://youtu.be/yRw7gnU-sd8" data-title="CRM de Leads — Pavetron"><span class="play-dot">▶</span>Ver demo</button>
+      </div>
+    </div>
+    <div class="ia-card reveal">
+      <span class="ia-icon">🍰</span>
+      <div class="ia-title">CRM de Recetas</div>
+      <div class="ia-desc">Carga de recetas propias o de inspiración, con sistema de borradores privados por usuario. Los visitantes ven únicamente las recetas que publico, manteniendo un espacio personal de ideas en proceso.</div>
+      <div class="ia-footer">
+        <div class="ia-status">En uso activo</div>
+        <a href="https://recetario-lac.vercel.app/" target="_blank" rel="noopener" class="ia-link">Ver sitio <span>→</span></a>
+      </div>
+    </div>
+    <div class="ia-card reveal">
+      <span class="ia-icon">📦</span>
+      <div class="ia-title">CRM de Merchandising</div>
+      <div class="ia-desc">Control de stock con conteo de cada producto que entra, sale o se agrega. Armado de kits con descarga automática del inventario, manteniendo trazabilidad completa de cada movimiento.</div>
+      <div class="ia-footer">
+        <div class="ia-status">En uso activo</div>
+        <button type="button" class="ia-link" data-youtube="https://youtu.be/52WfBiu1lo4" data-title="CRM de Merchandising"><span class="play-dot">▶</span>Ver demo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISEÑO GRÁFICO -->
+<section id="diseno">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Diseño visual</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="diseno-filters reveal">
+    <button class="filter-btn active" onclick="filterDiseno(this, 'all')">Todo</button>
+    <button class="filter-btn" onclick="filterDiseno(this, 'social')">Social Media</button>
+    <button class="filter-btn" onclick="filterDiseno(this, 'brand')">Branding</button>
+    <button class="filter-btn" onclick="filterDiseno(this, 'video')">Video / Reels</button>
+  </div>
+  <div class="diseno-grid" id="disenoGrid">
+    <a href="https://www.instagram.com/p/DYQMOM9iu8s/?img_index=1" target="_blank" rel="noopener" class="diseno-item reveal" data-cat="social">
+      <div class="diseno-preview">
+        <img src="pieces/landium-post.jpg" alt="Feed Landium" loading="lazy" onerror="this.remove()">
+        <div class="diseno-placeholder">
+          <span class="diseno-placeholder-icon">📷</span>
+          <code>pieces/landium-post.jpg</code>
+        </div>
+        <span class="diseno-badge instagram">Instagram</span>
+        <div class="diseno-overlay"><span class="diseno-overlay-cta">Ver Carrusel →</span></div>
+      </div>
+      <div class="diseno-label">
+        <div class="diseno-name">Feed — Landium</div>
+        <div class="diseno-type">Carrusel · Illustrator</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DYAvU3lDRk8/" target="_blank" rel="noopener" class="diseno-item reveal" data-cat="social">
+      <div class="diseno-preview">
+        <img src="pieces/vmh-blog.jpg" alt="Blog Vaca Muerta Housing" loading="lazy" onerror="this.remove()">
+        <div class="diseno-placeholder">
+          <span class="diseno-placeholder-icon">🎬</span>
+          <code>pieces/vmh-blog.jpg</code>
+        </div>
+        <span class="diseno-badge instagram">Instagram</span>
+        <div class="diseno-overlay"><span class="diseno-overlay-cta">Ver post →</span></div>
+      </div>
+      <div class="diseno-label">
+        <div class="diseno-name">Blog — Vaca Muerta Services</div>
+        <div class="diseno-type">Post · Figma</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DYfpBDgitnG/?img_index=1" target="_blank" rel="noopener" class="diseno-item reveal" data-cat="social">
+      <div class="diseno-preview">
+        <img src="pieces/crowdium-carrusel.jpg" alt="Carrusel Crowdium" loading="lazy" onerror="this.remove()">
+        <div class="diseno-placeholder">
+          <span class="diseno-placeholder-icon">📊</span>
+          <code>pieces/crowdium-carrusel.jpg</code>
+        </div>
+        <span class="diseno-badge instagram">Instagram</span>
+        <div class="diseno-overlay"><span class="diseno-overlay-cta">Ver Carrusel →</span></div>
+      </div>
+      <div class="diseno-label">
+        <div class="diseno-name">Carrusel — Crowdium</div>
+        <div class="diseno-type">Carrusel · Illustrator</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/petitpasteleria/" target="_blank" rel="noopener" class="diseno-item reveal" data-cat="social">
+      <div class="diseno-preview">
+        <img src="pieces/petit-feed.jpg" alt="Petit Pastelería" loading="lazy" onerror="this.remove()">
+        <div class="diseno-placeholder">
+          <span class="diseno-placeholder-icon">🍰</span>
+          <code>pieces/petit-feed.jpg</code>
+        </div>
+        <span class="diseno-badge instagram">Instagram</span>
+        <div class="diseno-overlay"><span class="diseno-overlay-cta">Ver feed →</span></div>
+      </div>
+      <div class="diseno-label">
+        <div class="diseno-name">Petit Pastelería</div>
+        <div class="diseno-type">Foto + diseño · Illutsrator - Canva</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DWBx68TgCEV/?img_index=1" target="_blank" rel="noopener" class="diseno-item reveal" data-cat="social">
+      <div class="diseno-preview">
+        <img src="pieces/petit-post.jpg" alt="Carrusel Petit Pastelería" loading="lazy" onerror="this.remove()">
+        <div class="diseno-placeholder">
+          <span class="diseno-placeholder-icon">🍰</span>
+          <code>pieces/petit-post.jpg</code>
+        </div>
+        <span class="diseno-badge instagram">Instagram</span>
+        <div class="diseno-overlay"><span class="diseno-overlay-cta">Ver post →</span></div>
+      </div>
+      <div class="diseno-label">
+        <div class="diseno-name">Post — Petit Pastelería</div>
+        <div class="diseno-type">Foto + diseño · Canva</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/reel/DA_gA7dpz9j/" target="_blank" rel="noopener" class="diseno-item reveal" data-cat="video">
+      <div class="diseno-preview">
+        <img src="pieces/pavetron-reel.jpg" alt="Reel Pavetron" loading="lazy" onerror="this.remove()">
+        <div class="diseno-placeholder">
+          <span class="diseno-placeholder-icon">▶️</span>
+          <code>pieces/pavetron-reel.jpg</code>
+        </div>
+        <span class="diseno-badge instagram">Instagram</span>
+        <div class="diseno-overlay"><span class="diseno-overlay-cta">Ver reel →</span></div>
+      </div>
+      <div class="diseno-label">
+        <div class="diseno-name">Reel — Pavetron in field</div>
+        <div class="diseno-type">Video · CapCut</div>
+      </div>
+    </a>
+
+    <div class="diseno-coming">
+      ✦ Y mucho más
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Contacto</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <h3 class="contact-headline">
+        ¿Buscás a alguien que <em>entiende</em> contenido, comunidades e IA?
+      </h3>
+      <p class="contact-text">
+        Estoy abierta a sumarme a equipos creativos, agencias de marketing o empresas que quieran crecer en redes con estrategia real y herramientas de IA aplicadas.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:guerraguada0@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          guerraguada0@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/guadalupe-guerra" target="_blank" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          linkedin.com/in/guadalupe-guerra
+        </a>
+        <a href="https://instagram.com/guadaguerraa" target="_blank" class="contact-link">
+          <div class="contact-link-icon">@</div>
+          @guadaguerraa
+        </a>
+        <a href="https://wa.me/5491167132345" target="_blank" class="contact-link">
+          <div class="contact-link-icon">📱</div>
+          WhatsApp directo
+        </a>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-input" placeholder="Tu nombre" id="fname">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="tu@email.com" id="femail">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Empresa / Contexto</label>
+          <input type="text" class="form-input" placeholder="¿Desde dónde escribís?" id="fcompany">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensaje</label>
+          <textarea class="form-textarea" placeholder="Contame sobre el proyecto o la posición..." id="fmessage"></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Enviar mensaje →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2026 Guadalupe Guerra · Buenos Aires, Argentina</div>
+  <div class="footer-made">Hecho con Amor <span>♥</span></div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="video-modal-content">
+    <div class="video-modal-header">
+      <div class="video-modal-title" id="modalTitle"></div>
+      <button class="video-modal-close" type="button" onclick="closeVideoModal()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="video-modal-frame" id="modalFrame"></div>
+    <div class="video-modal-fallback" id="modalFallback">
+      <strong>Video próximamente.</strong><br>
+      Subí el video a YouTube no listado y pegá el ID en el HTML para activarlo.
+    </div>
+  </div>
+</div>
+
+<script>
+/* CURSOR */
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a, button, .caso-row, .ia-card, .attr-card, .diseno-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '18px';
+    cursor.style.height = '18px';
+    cursor.style.background = 'var(--coral)';
+    ring.style.width = '52px';
+    ring.style.height = '52px';
+    ring.style.borderColor = 'var(--coral)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '10px';
+    cursor.style.height = '10px';
+    cursor.style.background = 'var(--purple)';
+    ring.style.width = '36px';
+    ring.style.height = '36px';
+    ring.style.borderColor = 'var(--purple-light)';
+  });
+});
+
+/* TYPEWRITER */
+const roles = [
+  'Content Strategy',
+  'Community Management',
+  'Brand Partnerships',
+  'Herramientas de IA',
+  'Diseño & Video',
+  'Influencer Management'
+];
+let ri = 0, ci = 0, deleting = false;
+const tw = document.getElementById('typewriter');
+function type() {
+  const word = roles[ri];
+  if (!deleting) {
+    tw.textContent = word.slice(0, ci + 1);
+    ci++;
+    if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    setTimeout(type, 65);
+  } else {
+    tw.textContent = word.slice(0, ci - 1);
+    ci--;
+    if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; setTimeout(type, 400); return; }
+    setTimeout(type, 35);
+  }
+}
+type();
+
+/* SCROLL REVEAL */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+/* FILTER */
+function filterDiseno(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.diseno-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+/* FORM — abre el cliente de mail con todos los datos del form */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const company = document.getElementById('fcompany').value.trim();
+  const message = document.getElementById('fmessage').value.trim();
+
+  if (!name) { alert('Por favor ingresá tu nombre.'); return; }
+  if (!message) { alert('Por favor escribí un mensaje.'); return; }
+
+  const subject = encodeURIComponent('Contacto desde portfolio — ' + name);
+  const body = encodeURIComponent(
+    'Nombre: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    'Empresa / Contexto: ' + company + '\n\n' +
+    'Mensaje:\n' + message + '\n\n' +
+    '— Enviado desde tu portfolio web'
+  );
+
+  window.location.href = 'mailto:guerraguada0@gmail.com?subject=' + subject + '&body=' + body;
+
+  btn.textContent = '✓ Abriendo tu mail...';
+  btn.style.background = 'var(--teal)';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Enviar mensaje →';
+    btn.style.background = 'var(--purple)';
+    btn.disabled = false;
+  }, 3000);
+}
+
+/* VIDEO MODAL — soporta YouTube (data-youtube) o video local (data-video) */
+const videoModal = document.getElementById('videoModal');
+const modalFrame = document.getElementById('modalFrame');
+const modalTitle = document.getElementById('modalTitle');
+const modalFallback = document.getElementById('modalFallback');
+
+document.querySelectorAll('.ia-link[data-youtube], .ia-link[data-video]').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const ytId = btn.dataset.youtube;
+    const localSrc = btn.dataset.video;
+    const title = btn.dataset.title || '';
+    modalTitle.textContent = title;
+    modalFallback.style.display = 'none';
+    modalFrame.innerHTML = '';
+
+    if (ytId && ytId !== 'PEGAR_ID_AQUI') {
+      modalFrame.innerHTML = '<iframe src="https://www.youtube.com/embed/' + encodeURIComponent(ytId) + '?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    } else if (localSrc) {
+      const v = document.createElement('video');
+      v.controls = true;
+      v.autoplay = true;
+      v.playsInline = true;
+      v.src = localSrc;
+      v.onerror = () => {
+        modalFrame.innerHTML = '';
+        modalFallback.innerHTML = '<strong>Video aún no cargado.</strong><br>Subilo a YouTube no listado y pegá el ID en <code>data-youtube</code>.';
+        modalFallback.style.display = 'block';
+      };
+      modalFrame.appendChild(v);
+    } else {
+      modalFallback.style.display = 'block';
+    }
+
+    videoModal.classList.add('active');
+    videoModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeVideoModal() {
+  videoModal.classList.remove('active');
+  videoModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  modalFrame.innerHTML = '';
+}
+
+videoModal.addEventListener('click', e => {
+  if (e.target === videoModal) closeVideoModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && videoModal.classList.contains('active')) closeVideoModal();
+});
+</script>
+</body>
+</html>
+
