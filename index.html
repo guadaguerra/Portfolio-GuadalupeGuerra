@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guadalupe Guerra — Content Strategist</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e0e0e'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial Black, Helvetica, sans-serif' font-weight='900' font-size='15' fill='white' letter-spacing='-1'>GG</text><circle cx='25' cy='22' r='2.2' fill='%23E63946'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -81,12 +82,32 @@
   .nav-logo {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: 0.02em;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
     color: var(--white);
     text-decoration: none;
+    background: #000;
+    padding: 8px 14px 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.25s ease;
   }
-  .nav-logo span { color: var(--purple); }
+  .nav-logo:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    transform: translateY(-1px);
+  }
+  .nav-logo span {
+    color: var(--purple);
+    font-size: 1.3rem;
+    line-height: 0;
+    margin-left: 1px;
+    transition: color 0.2s;
+  }
+  .nav-logo:hover span { color: var(--yellow); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     font-size: 0.8rem;
