@@ -4,7 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guadalupe Guerra — Content Strategist</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e0e0e'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial Black, Helvetica, sans-serif' font-weight='900' font-size='15' fill='white' letter-spacing='-1'>GG</text><circle cx='25' cy='22' r='2.2' fill='%23E63946'/></svg>">
+
+<!-- FAVICON SVG (browser tab) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><radialGradient id='g' cx='20%25' cy='20%25'><stop offset='0%25' stop-color='%23E63946' stop-opacity='0.5'/><stop offset='100%25' stop-color='%230e0e0e' stop-opacity='0'/></radialGradient></defs><rect width='32' height='32' rx='6' fill='%230e0e0e'/><rect width='32' height='32' rx='6' fill='url(%23g)'/><circle cx='27' cy='27' r='6' fill='%23F5C842' opacity='0.25'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial Black, Helvetica, sans-serif' font-weight='900' font-size='15' fill='white' letter-spacing='-1'>GG</text><circle cx='25' cy='22' r='2.2' fill='%23E63946'/></svg>">
+
+<!-- APPLE TOUCH ICON (iOS Add to Home Screen) -->
+<!-- Cuando subas apple-touch-icon.png a la raíz, iOS lo va a usar automáticamente. Mientras tanto cae al SVG inline (limitado en iOS) -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='glow1' cx='15%25' cy='15%25'><stop offset='0%25' stop-color='%23E63946' stop-opacity='0.55'/><stop offset='100%25' stop-color='%230e0e0e' stop-opacity='0'/></radialGradient><radialGradient id='glow2' cx='85%25' cy='90%25'><stop offset='0%25' stop-color='%23F5C842' stop-opacity='0.35'/><stop offset='100%25' stop-color='%230e0e0e' stop-opacity='0'/></radialGradient></defs><rect width='180' height='180' rx='38' fill='%230e0e0e'/><rect width='180' height='180' rx='38' fill='url(%23glow1)'/><rect width='180' height='180' rx='38' fill='url(%23glow2)'/><rect x='22' y='148' width='42' height='2.5' fill='%23F5C842'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial Black, Helvetica, sans-serif' font-weight='900' font-size='86' fill='white' letter-spacing='-4'>GG</text><circle cx='142' cy='110' r='10' fill='%23E63946'/></svg>">
+
+<!-- PWA / Mobile Meta -->
+<meta name="theme-color" content="#0e0e0e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GG.">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Guadalupe Guerra","short_name":"GG.","description":"Portfolio de Guadalupe Guerra","start_url":"/","display":"standalone","background_color":"%230e0e0e","theme_color":"%230e0e0e","icons":[{"src":"apple-touch-icon.png","sizes":"180x180","type":"image/png"}]}'>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -86,18 +102,13 @@
     letter-spacing: -0.02em;
     color: var(--white);
     text-decoration: none;
-    background: #000;
-    padding: 8px 14px 8px 14px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.08);
     line-height: 1;
     display: inline-flex;
     align-items: center;
-    transition: all 0.25s ease;
+    transition: color 0.25s ease, transform 0.25s ease;
   }
   .nav-logo:hover {
-    background: var(--purple);
-    border-color: var(--purple);
+    color: var(--yellow);
     transform: translateY(-1px);
   }
   .nav-logo span {
@@ -107,7 +118,7 @@
     margin-left: 1px;
     transition: color 0.2s;
   }
-  .nav-logo:hover span { color: var(--yellow); }
+  .nav-logo:hover span { color: var(--white); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     font-size: 0.8rem;
