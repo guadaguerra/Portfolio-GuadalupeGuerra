@@ -1900,18 +1900,38 @@ const modalFrame = document.getElementById('modalFrame');
 const modalTitle = document.getElementById('modalTitle');
 const modalFallback = document.getElementById('modalFallback');
 
+/* Extrae el ID de YouTube aceptando: ID directo, youtu.be/ID, youtube.com/watch?v=ID, /embed/ID, /shorts/ID */
+function extractYouTubeId(input) {
+  if (!input) return null;
+  const s = String(input).trim();
+  if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+  const patterns = [
+    /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+    /[?&]v=([a-zA-Z0-9_-]{11})/
+  ];
+  for (const p of patterns) {
+    const m = s.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
 document.querySelectorAll('.ia-link[data-youtube], .ia-link[data-video]').forEach(btn => {
   btn.addEventListener('click', e => {
     e.preventDefault();
-    const ytId = btn.dataset.youtube;
+    const rawYt = btn.dataset.youtube;
+    const ytId = (rawYt && rawYt !== 'PEGAR_ID_AQUI') ? extractYouTubeId(rawYt) : null;
     const localSrc = btn.dataset.video;
     const title = btn.dataset.title || '';
     modalTitle.textContent = title;
     modalFallback.style.display = 'none';
     modalFrame.innerHTML = '';
 
-    if (ytId && ytId !== 'PEGAR_ID_AQUI') {
-      modalFrame.innerHTML = '<iframe src="https://www.youtube.com/embed/' + encodeURIComponent(ytId) + '?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    if (ytId) {
+      modalFrame.innerHTML = '<iframe src="https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    } else if (rawYt && rawYt !== 'PEGAR_ID_AQUI') {
+      modalFallback.innerHTML = '<strong>Link de YouTube inválido.</strong><br>Pegaste: <code>' + rawYt + '</code><br>Asegurate de pegar el link completo de YouTube o solo el ID (11 caracteres).';
+      modalFallback.style.display = 'block';
     } else if (localSrc) {
       const v = document.createElement('video');
       v.controls = true;
